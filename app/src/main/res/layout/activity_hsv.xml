@@ -4,74 +4,76 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".HsvActivity">
 
     <View
         android:id="@+id/color_square"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_marginTop="116dp"
         android:background="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.209" />
 
     <SeekBar
-        android:id="@+id/seekBarRed"
+        android:id="@+id/seekBarHue"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="90dp"
+        android:layout_marginTop="72dp"
         android:theme="@style/SeekBarRedColor"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/color_square" />
 
     <SeekBar
-        android:id="@+id/seekBarGreen"
+        android:id="@+id/seekBarSat"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:theme="@style/SeekBarGreenColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/seekBarRed" />
+        app:layout_constraintTop_toBottomOf="@+id/seekBarHue" />
 
     <SeekBar
-        android:id="@+id/seekBarBlue"
+        android:id="@+id/seekBarValue"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:theme="@style/SeekBarBlueColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/seekBarGreen" />
+        app:layout_constraintTop_toBottomOf="@+id/seekBarSat" />
 
     <TextView
-        android:id="@+id/textViewRed"
+        android:id="@+id/textViewHue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="90dp"
-        app:layout_constraintEnd_toStartOf="@+id/seekBarRed"
-        app:layout_constraintHorizontal_bias="0.47"
+        android:layout_marginTop="72dp"
+        app:layout_constraintEnd_toStartOf="@+id/seekBarHue"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/color_square" />
 
     <TextView
-        android:id="@+id/textViewGreen"
+        android:id="@+id/textViewSat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@+id/seekBarGreen"
+        app:layout_constraintEnd_toStartOf="@+id/seekBarSat"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/seekBarGreen" />
+        app:layout_constraintTop_toTopOf="@+id/seekBarSat" />
 
     <TextView
-        android:id="@+id/textViewBlue"
+        android:id="@+id/textViewValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@+id/seekBarBlue"
+        app:layout_constraintEnd_toStartOf="@+id/seekBarValue"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/seekBarBlue" />
+        app:layout_constraintTop_toTopOf="@+id/seekBarValue" />
 
     <TextView
         android:id="@+id/textViewHexColor"
@@ -84,16 +86,17 @@
         app:layout_constraintTop_toBottomOf="@+id/color_square" />
 
     <Button
-        android:id="@+id/hsvButton"
+        android:id="@+id/rgbButton"
         android:layout_width="100dp"
         android:layout_height="40dp"
-        android:text="@string/hsvButtonText"
-        android:textSize="20dp"
+        android:text="@string/rgbButtonText"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/seekBarBlue"
-        app:layout_constraintVertical_bias="0.395" />
+        app:layout_constraintTop_toBottomOf="@+id/seekBarValue"
+        app:layout_constraintVertical_bias="0.321" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

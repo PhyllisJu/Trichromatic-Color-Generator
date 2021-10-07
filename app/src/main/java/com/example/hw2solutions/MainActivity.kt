@@ -1,9 +1,11 @@
 package com.example.hw2solutions
 
+import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +22,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var textViewGreen: TextView
     lateinit var colorSquare : View
     lateinit var hexColorText : TextView
+    lateinit var hsvButton : Button
+    lateinit var color : Integer  //= intent.extras?.getInt("COLOR")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,20 +38,40 @@ class MainActivity : AppCompatActivity() {
         textViewBlue = findViewById(R.id.textViewBlue)
         colorSquare = findViewById(R.id.color_square)
         hexColorText = findViewById(R.id.textViewHexColor)
+        hsvButton = findViewById(R.id.hsvButton)
+
+        color = (intent.extras?.getInt("COLOR") ?: Color.rgb(Random.nextInt(0, 256),
+            Random.nextInt(0, 256), Random.nextInt(0, 256))) as Integer
 
         setUpSeekbar(seekBarRed, textViewRed, resources.getString(R.string.red))
         setUpSeekbar(seekBarGreen, textViewGreen, resources.getString(R.string.green))
         setUpSeekbar(seekBarBlue, textViewBlue, resources.getString(R.string.blue))
+        hsvButton.setOnClickListener(object : View.OnClickListener {
+             override fun onClick(v: View): Unit {
+                test()
+            }
+        });
+
 
         // Initialize the square's color on onCreate()
         regenerateColor()
+
     }
 
-    private fun initialSetUp(sb: SeekBar, tv: TextView, color: String) {
+    private fun initialSetUp(sb: SeekBar, tv: TextView, c: String) {
         // Set initial color to random number
-        val randNum = Random.nextInt(0, 256)
-        sb.progress = randNum
-        tv.text = resources.getString(R.string.seekbarLabel, color, randNum)
+
+        if (color != null) {
+            if (c.equals("Red")) {
+                sb.progress = Color.red(color.toInt())
+            } else if (c.equals("Green")) {
+                sb.progress = Color.green(color.toInt())
+            }
+            else {
+                sb.progress = Color.blue(color.toInt())
+            }
+            tv.text = resources.getString(R.string.seekbarLabel, c, sb.progress)
+        }
     }
 
     private fun setUpSeekbar(sb: SeekBar, tv: TextView, color : String) {
@@ -96,4 +120,34 @@ class MainActivity : AppCompatActivity() {
         )
 
     }
+
+ /*   private fun setUpHsvButton(button : Button) {
+
+    }
+
+    override fun onClick(v: View?) {
+        var hsvArr = FloatArray(3)
+        Color.RGBToHSV(seekBarRed.progress, seekBarGreen.progress, seekBarBlue.progress, hsvArr)
+        var intent = Intent(this, HsvActivity::class.java)
+        intent.putExtra("HUE", hsvArr[0])
+        intent.putExtra("SAT",hsvArr[1])
+        intent.putExtra("VALUE",hsvArr[2])
+        startActivity(intent)
+    }*/
+
+  fun test() {
+     var hsvArr = FloatArray(3)
+     Color.RGBToHSV(
+         seekBarRed.progress,
+         seekBarGreen.progress,
+         seekBarBlue.progress,
+         hsvArr
+     )
+     var intent = Intent(this, HsvActivity::class.java)
+     intent.putExtra("HUE", hsvArr[0])
+     intent.putExtra("SAT", hsvArr[1])
+     intent.putExtra("VALUE", hsvArr[2])
+     startActivity(intent)
+ }
+
 }
