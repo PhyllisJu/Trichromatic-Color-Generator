@@ -88,11 +88,24 @@
         android:layout_width="100dp"
         android:layout_height="40dp"
         android:text="@string/hsvButtonText"
-        android:textSize="20dp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.752"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/seekBarBlue"
         app:layout_constraintVertical_bias="0.336" />
+
+    <Button
+        android:id="@+id/shareButton"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:text="@string/shareStr"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/color_square"
+        app:layout_constraintHorizontal_bias="0.48"
+        app:layout_constraintStart_toStartOf="@+id/color_square"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.072" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var hexColorText : TextView
     lateinit var hsvButton : Button
     lateinit var color : Integer  //= intent.extras?.getInt("COLOR")
+    lateinit var shareButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +40,7 @@ class MainActivity : AppCompatActivity() {
         colorSquare = findViewById(R.id.color_square)
         hexColorText = findViewById(R.id.textViewHexColor)
         hsvButton = findViewById(R.id.hsvButton)
+        shareButton = findViewById(R.id.shareButton)
 
         color = (intent.extras?.getInt("COLOR") ?: Color.rgb(Random.nextInt(0, 256),
             Random.nextInt(0, 256), Random.nextInt(0, 256))) as Integer
@@ -47,10 +49,22 @@ class MainActivity : AppCompatActivity() {
         setUpSeekbar(seekBarGreen, textViewGreen, resources.getString(R.string.green))
         setUpSeekbar(seekBarBlue, textViewBlue, resources.getString(R.string.blue))
         hsvButton.setOnClickListener(object : View.OnClickListener {
-             override fun onClick(v: View): Unit {
-                test()
+             override fun onClick(v: View) {
+                hsvBtnClick()
             }
-        });
+        })
+
+        shareButton.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v : View) {
+                var intent = Intent()
+                intent.setAction(Intent.ACTION_SEND)
+                intent.putExtra(Intent.EXTRA_TEXT, "Check out this color: <"+hexColorText.text+">")
+                intent.setType("text/plain")
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent)
+                }
+            }
+        })
 
 
         // Initialize the square's color on onCreate()
@@ -135,7 +149,7 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }*/
 
-  fun test() {
+  fun hsvBtnClick() {
      var hsvArr = FloatArray(3)
      Color.RGBToHSV(
          seekBarRed.progress,
@@ -147,7 +161,10 @@ class MainActivity : AppCompatActivity() {
      intent.putExtra("HUE", hsvArr[0])
      intent.putExtra("SAT", hsvArr[1])
      intent.putExtra("VALUE", hsvArr[2])
-     startActivity(intent)
+      if (intent.resolveActivity(packageManager) != null) {
+          startActivity(intent)
+      }
+
  }
 
 }
